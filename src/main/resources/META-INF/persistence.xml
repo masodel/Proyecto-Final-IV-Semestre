@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    persistence.xml — Configuración de Hibernate 6 / JPA 3.1
+    Unidad de Persistencia: football_pu
+    Módulo 1 (Integrante 1 - Donald)
+-->
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+             https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
+             version="3.1">
+
+    <persistence-unit name="football_pu" transaction-type="RESOURCE_LOCAL">
+
+        <!-- Proveedor JPA: Hibernate -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- 8 Entidades del Dominio -->
+        <class>ni.edu.uam.proyectofinalivsemestre.model.Competition</class>
+        <class>ni.edu.uam.proyectofinalivsemestre.model.Team</class>
+        <class>ni.edu.uam.proyectofinalivsemestre.model.Player</class>
+        <class>ni.edu.uam.proyectofinalivsemestre.model.Match</class>
+        <class>ni.edu.uam.proyectofinalivsemestre.model.MatchEvent</class>
+        <class>ni.edu.uam.proyectofinalivsemestre.model.Standing</class>
+        <class>ni.edu.uam.proyectofinalivsemestre.model.Lineup</class>
+        <class>ni.edu.uam.proyectofinalivsemestre.model.Favorite</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+            <!-- Conexión a PostgreSQL (modo trust local: sin contraseña) -->
+            <property name="jakarta.persistence.jdbc.driver"   value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url"      value="jdbc:postgresql://127.0.0.1:5432/football_db"/>
+            <property name="jakarta.persistence.jdbc.user"     value="postgres"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+
+            <!--
+                DDL Auto:
+                  - "validate"  → Solo valida contra la BD existente (Recomendado para producción)
+                  - "update"    → Actualiza el esquema sin borrar datos (Recomendado para desarrollo)
+                  - "create"    → Recrea el esquema al arrancar (Borra datos existentes)
+            -->
+            <property name="hibernate.hbm2ddl.auto"          value="update"/>
+
+            <!-- Dialecto PostgreSQL para Hibernate 6 -->
+            <property name="hibernate.dialect"
+                      value="org.hibernate.dialect.PostgreSQLDialect"/>
+
+            <!-- Muestra SQL generado en consola (útil en desarrollo) -->
+            <property name="hibernate.show_sql"              value="true"/>
+            <property name="hibernate.format_sql"            value="true"/>
+
+            <!-- Pool de conexiones básico de Hibernate (suficiente para escritorio) -->
+            <property name="hibernate.connection.pool_size"  value="5"/>
+
+            <!-- Zona horaria UTC para evitar desfases con columnas TIMESTAMP -->
+            <property name="hibernate.jdbc.time_zone"        value="UTC"/>
+        </properties>
+    </persistence-unit>
+</persistence>

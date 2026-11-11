@@ -14,7 +14,7 @@ public class DatabaseConnection {
     // En Windows, 127.0.0.1 fuerza IPv4, garantizando que aplique la regla 'trust' de pg_hba.conf
     private static final String URL = "jdbc:postgresql://127.0.0.1:5432/football_db";
     private static final String USER = "postgres";
-    private static final String PASSWORD = ""; 
+    private static final String PASSWORD = "2103";
 
     static {
         try {
