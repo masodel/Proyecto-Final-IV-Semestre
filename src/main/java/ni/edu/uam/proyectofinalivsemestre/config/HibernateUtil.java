@@ -1,58 +1,29 @@
 package ni.edu.uam.proyectofinalivsemestre.config;
+import jakarta.persistence.*;
+import java.util.*;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-
-/**
- * Fábrica centralizada y segura del EntityManager de Hibernate.
- * Implementa el patrón Singleton para la EntityManagerFactory (costosa de crear).
- *
- * Uso recomendado en los DAOs:
- * <pre>
- *   try (EntityManager em = HibernateUtil.getEntityManager()) {
- *       // ... operaciones JPA
- *   }
- * </pre>
- *
- * Módulo 1 — Integrante 1 (Donald)
- */
+/** Factory perezosa: un fallo de conexión permite reintentar. */
 public final class HibernateUtil {
-
-    /** Nombre de la unidad de persistencia definida en persistence.xml */
-    private static final String PERSISTENCE_UNIT = "football_pu";
-
-    /** Singleton de la factory — se crea una sola vez al cargar la clase */
-    private static final EntityManagerFactory EMF;
-
-    static {
-        try {
-            EMF = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
-            System.out.println("[HibernateUtil] ✅ EntityManagerFactory inicializada correctamente.");
-        } catch (Exception e) {
-            System.err.println("[HibernateUtil] ❌ Error al inicializar Hibernate: " + e.getMessage());
-            throw new ExceptionInInitializerError(e);
-        }
-    }
-
-    // Constructor privado: clase utilitaria, no instanciable
+    private static EntityManagerFactory factory;
     private HibernateUtil() {}
-
-    /**
-     * Retorna un nuevo EntityManager. Debe cerrarse con try-with-resources.
-     */
-    public static EntityManager getEntityManager() {
-        return EMF.createEntityManager();
-    }
-
-    /**
-     * Libera todos los recursos de Hibernate al cerrar la aplicación.
-     * Llama este método en el shutdown hook o en Application.stop() de JavaFX.
-     */
-    public static void shutdown() {
-        if (EMF != null && EMF.isOpen()) {
-            EMF.close();
-            System.out.println("[HibernateUtil] 🔒 EntityManagerFactory cerrada.");
+    public static synchronized EntityManager getEntityManager() {
+        if (factory == null || !factory.isOpen()) {
+            Map<String, Object> opciones = new HashMap<>();
+            opciones.put("jakarta.persistence.jdbc.url", LocalConfig.valor("DB_URL", "jdbc:postgresql://127.0.0.1:5432/football_db"));
+            opciones.put("jakarta.persistence.jdbc.user", LocalConfig.valor("DB_USER", "postgres"));
+            opciones.put("jakarta.persistence.jdbc.password", LocalConfig.valor("DB_PASSWORD", ""));
+            opciones.put("hibernate.show_sql", "false");
+            opciones.put("hibernate.connection.connectTimeout", "10");
+            opciones.put("hibernate.connection.socketTimeout", "30");
+            try { factory = Persistence.createEntityManagerFactory("football_pu", opciones); }
+            catch (RuntimeException e) {
+                throw new IllegalStateException("No se pudo conectar con PostgreSQL. Revisa el servicio y la configuración local.");
+            }
         }
+        return factory.createEntityManager();
+    }
+    public static synchronized void shutdown() {
+        if (factory != null && factory.isOpen()) factory.close();
+        factory = null;
     }
 }

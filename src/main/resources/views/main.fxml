@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.proyectofinalivsemestre.controller.MainController">
+    <fx:define><ToggleGroup fx:id="grupoNav"/></fx:define>
+    <left>
+        <VBox minWidth="200" prefWidth="200" maxWidth="200" spacing="4" styleClass="barra-lateral">
+            <Label text="Fútbol App" styleClass="marca"/>
+            <ToggleButton fx:id="btnPartidos" text="Partidos" toggleGroup="$grupoNav" onAction="#irAPartidos" styleClass="nav" maxWidth="Infinity"/>
+            <ToggleButton fx:id="btnPosiciones" text="Posiciones" toggleGroup="$grupoNav" onAction="#irAPosiciones" styleClass="nav" maxWidth="Infinity"/>
+            <ToggleButton fx:id="btnFavoritos" text="Favoritos" toggleGroup="$grupoNav" onAction="#irAFavoritos" styleClass="nav" maxWidth="Infinity"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Label fx:id="lblEstadoCache" wrapText="true" styleClass="pie"/>
+        </VBox>
+    </left>
+    <center><StackPane fx:id="contenido" minWidth="0"/></center>
+</BorderPane>

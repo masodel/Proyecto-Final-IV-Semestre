@@ -37,3 +37,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Credenciales locales: fuera de resources para no incluirlas en el JAR
+/config.local.properties
+/src/main/resources/config.properties
+/.env

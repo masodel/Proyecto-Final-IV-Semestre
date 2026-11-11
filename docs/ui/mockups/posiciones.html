@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Posiciones</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"><style>
+body{margin:0}
+.win{width:1100px;height:680px;display:flex;font-family:Inter,Arial,sans-serif;color:#14221E;background:#F2F5F3;box-sizing:border-box;overflow:hidden}
+aside{width:200px;background:#0F2A24;color:#fff;display:flex;flex-direction:column;padding:20px 12px;box-sizing:border-box;gap:4px;flex:none}
+.brand{font-weight:700;font-size:18px;padding:4px 12px 20px}
+.nav{display:block;padding:12px;border-radius:8px;color:#C9DAD3;font-size:14px;text-decoration:none}
+.nav.on{background:#1C4A3C;color:#fff;font-weight:600}
+.foot{margin-top:auto;font-size:12px;line-height:1.5;color:#A9C2B8;padding:12px}
+main{flex:1;display:flex;flex-direction:column;padding:24px 28px;gap:16px;min-width:0;box-sizing:border-box}
+h1{margin:0;font-size:22px}h2{margin:0;font-size:15px}
+.bar{display:flex;gap:10px;align-items:center}
+.btn{height:44px;padding:0 14px;border:1px solid #C5D2CC;background:#fff;border-radius:8px;font:500 14px Inter,Arial,sans-serif;color:#14221E}
+.btn.p{background:#17775A;color:#fff;border-color:#17775A}
+.card{background:#fff;border:1px solid #DCE5E0;border-radius:10px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-weight:600;font-size:12px;color:#4A5B55;background:#EAF0ED;padding:10px 12px}
+td{padding:4px 12px;border-top:1px solid #E6EDE9;height:44px}
+.r{text-align:right}.c{text-align:center}
+.tag{font-size:12px;padding:3px 8px;border-radius:99px;background:#E3EFE9;color:#0F5A43;font-weight:600}
+.live{background:#FDE7E4;color:#9A2417}
+.note{font-size:12px;color:#4A5B55}
+.item{padding:12px 14px;border-top:1px solid #E6EDE9;font-size:14px;display:flex;justify-content:space-between;align-items:center}
+.item.on{background:#E3EFE9;font-weight:600}
+.bk{height:8px;border-radius:4px;background:#D6E2DC;display:flex;overflow:hidden}
+.st{display:grid;grid-template-columns:40px 1fr 40px;gap:10px;align-items:center;font-size:13px}
+</style></head><body>
+<div class="win"><aside><div class="brand">Fútbol App</div>
+<a class="nav " href="#">Partidos</a><a class="nav on" href="#">Posiciones</a><a class="nav " href="#">Favoritos</a>
+<div class="foot">Caché local · actualizada 10:42<br>PostgreSQL conectado</div></aside><main>
+<div class="bar"><h1>Tablas de posiciones</h1><span style="flex:1"></span><button class="btn">Liga: LaLiga ▾</button><button class="btn">Temporada: 2026/27 ▾</button><button class="btn p">Actualizar</button></div>
+<div class="card"><table><thead><tr><th class="c">#</th><th>Equipo</th><th class="r">PJ</th><th class="r">G</th><th class="r">E</th><th class="r">P</th><th class="r">GF</th><th class="r">GC</th><th class="r">DG</th><th class="r">Pts</th></tr></thead><tbody>
+<tr><td style="border-left:4px solid #2F6FDB" class="c">1</td><td><b>Real Madrid</b></td><td class="r">11</td><td class="r">8</td><td class="r">2</td><td class="r">1</td><td class="r">24</td><td class="r">9</td><td class="r">+15</td><td class="r"><b>26</b></td></tr>
+<tr><td style="border-left:4px solid #2F6FDB" class="c">2</td><td><b>Barcelona</b></td><td class="r">11</td><td class="r">8</td><td class="r">1</td><td class="r">2</td><td class="r">28</td><td class="r">12</td><td class="r">+16</td><td class="r"><b>25</b></td></tr>
+<tr><td style="border-left:4px solid #2F6FDB" class="c">3</td><td><b>Atlético</b></td><td class="r">11</td><td class="r">7</td><td class="r">3</td><td class="r">1</td><td class="r">20</td><td class="r">8</td><td class="r">+12</td><td class="r"><b>24</b></td></tr>
+<tr><td style="border-left:4px solid #2F6FDB" class="c">4</td><td><b>Athletic</b></td><td class="r">11</td><td class="r">6</td><td class="r">3</td><td class="r">2</td><td class="r">17</td><td class="r">10</td><td class="r">+7</td><td class="r"><b>21</b></td></tr>
+<tr><td style="border-left:4px solid transparent" class="c">5</td><td><b>Villarreal</b></td><td class="r">11</td><td class="r">6</td><td class="r">2</td><td class="r">3</td><td class="r">21</td><td class="r">15</td><td class="r">+6</td><td class="r"><b>20</b></td></tr>
+<tr><td style="border-left:4px solid transparent" class="c">6</td><td><b>Real Sociedad</b></td><td class="r">11</td><td class="r">5</td><td class="r">4</td><td class="r">2</td><td class="r">14</td><td class="r">9</td><td class="r">+5</td><td class="r"><b>19</b></td></tr>
+<tr><td style="border-left:4px solid transparent" class="c">7</td><td><b>Betis</b></td><td class="r">11</td><td class="r">5</td><td class="r">3</td><td class="r">3</td><td class="r">16</td><td class="r">13</td><td class="r">+3</td><td class="r"><b>18</b></td></tr>
+<tr><td style="border-left:4px solid transparent" class="c">8</td><td><b>Girona</b></td><td class="r">11</td><td class="r">4</td><td class="r">3</td><td class="r">4</td><td class="r">13</td><td class="r">14</td><td class="r">-1</td><td class="r"><b>15</b></td></tr>
+</tbody></table></div>
+<div class="bar"><span style="width:12px;height:12px;background:#2F6FDB;border-radius:3px"></span><span class="note">Clasificación a Champions League · datos de ejemplo · clic en un equipo para ver sus partidos y marcarlo favorito</span></div>
+</main></div></body></html>

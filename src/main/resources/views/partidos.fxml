@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.proyectofinalivsemestre.controller.PartidosController" spacing="16" styleClass="contenido">
+<HBox spacing="10" alignment="CENTER_LEFT"><Label text="Partidos" styleClass="titulo"/><Region HBox.hgrow="ALWAYS"/><ComboBox fx:id="cmbLiga" prefWidth="170" accessibleText="Liga"/><DatePicker fx:id="dpFecha" prefWidth="170" accessibleText="Fecha"/><Button fx:id="btnActualizar" text="Actualizar" onAction="#onActualizar" styleClass="btn-primario"/></HBox>
+<TableView fx:id="tblPartidos" prefHeight="306" minHeight="306" maxHeight="306" styleClass="tarjeta">
+<columns><TableColumn fx:id="colHora" text="Hora" prefWidth="70" minWidth="45"/>
+<TableColumn fx:id="colLiga" text="Liga" prefWidth="105" minWidth="45"/>
+<TableColumn fx:id="colLocal" text="Local" prefWidth="140" minWidth="45"/>
+<TableColumn fx:id="colMarcador" text="Marcador" prefWidth="85" minWidth="45" styleClass="centrado, fuerte"/>
+<TableColumn fx:id="colVisitante" text="Visitante" prefWidth="135" minWidth="45"/>
+<TableColumn fx:id="colEstado" text="Estado" prefWidth="135" minWidth="45"/>
+<TableColumn fx:id="colFavorito" text="Fav." prefWidth="64" minWidth="45" styleClass="centrado"/></columns>
+</TableView>
+<HBox spacing="10" alignment="CENTER_LEFT"><Label fx:id="lblResumen" styleClass="nota" wrapText="true" HBox.hgrow="ALWAYS"/><Region HBox.hgrow="ALWAYS"/><ProgressIndicator fx:id="piCarga" visible="false" managed="false" prefWidth="24" prefHeight="24" maxWidth="24" maxHeight="24" accessibleText="Cargando datos"/></HBox>
+<Region VBox.vgrow="ALWAYS"/>
+</VBox>

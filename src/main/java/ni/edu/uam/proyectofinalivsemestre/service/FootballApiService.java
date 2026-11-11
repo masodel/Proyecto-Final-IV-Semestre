@@ -18,7 +18,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Properties;
+
 
 /**
  * Servicio encargado del consumo y mapeo de datos desde football-data.org (v4)
@@ -31,8 +31,8 @@ public class FootballApiService {
     // -------------------------------------------------------------------------
     // Constantes de Configuración de la API (Protegidas de Git)
     // -------------------------------------------------------------------------
-    // Carga segura: busca en Variable de Entorno -> System Property -> config.properties (ignorado por Git)
-    private static final String API_KEY = cargarApiKey();
+    // Carga segura: busca en Variable de Entorno -> System Property -> config.local.properties (fuera del classpath)
+
     private static final String BASE_URL = "https://api.football-data.org/v4/";
 
     // Códigos oficiales de competiciones solicitadas
@@ -107,45 +107,35 @@ public class FootballApiService {
      * @return Lista de PartidoTemp
      */
     public List<PartidoTemp> obtenerPartidosDesdeApi(String codigoCompeticion) {
-        if (API_KEY == null || API_KEY.isBlank()) {
-            System.err.println("[ADVERTENCIA] No se detectó ninguna API Key válida.");
-            System.err.println(">> Configúrala en 'src/main/resources/config.properties' o como variable de entorno 'FOOTBALL_API_KEY'.");
-            System.err.println(">> Redirigiendo a datos de prueba locales...");
-            return obtenerPartidosDesdeArchivoPrueba();
-        }
-
-        String endpoint = BASE_URL + "competitions/" + codigoCompeticion + "/matches";
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(endpoint))
-                .header("X-Auth-Token", API_KEY)
-                .header("Accept", "application/json")
-                .timeout(Duration.ofSeconds(15))
-                .GET()
-                .build();
-
-        try {
-            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-
-            if (response.statusCode() == 429) {
-                System.err.println("[ERROR 429] Límite de peticiones alcanzado (10 req/min). Cambia a usarMockLocal = true.");
-                return Collections.emptyList();
-            }
-
-            if (response.statusCode() != 200) {
-                System.err.println("[ERROR " + response.statusCode() + "] Respuesta de API: " + response.body());
-                return Collections.emptyList();
-            }
-
-            return parsearPartidos(response.body());
-
-        } catch (IOException | InterruptedException e) {
-            System.err.println("[ERROR] Excepción de conexión con la API: " + e.getMessage());
+        try { return parsearPartidos(consultarRecurso("competitions/" + codigoCompeticion + "/matches")); }
+        catch (IOException e) { throw new IllegalStateException(e.getMessage(), e); }
+        catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            return Collections.emptyList();
+            throw new IllegalStateException("La consulta a la API fue interrumpida.", e);
         }
     }
 
+    /** No sustituye errores por listas vacías ni datos ficticios. */
+    public String consultarRecurso(String recurso) throws IOException, InterruptedException {
+        String token = ni.edu.uam.proyectofinalivsemestre.config.LocalConfig.valor("FOOTBALL_API_KEY", "");
+        if (token.isBlank()) throw new IOException("Falta FOOTBALL_API_KEY en la configuración local.");
+        if (!recurso.matches("(?:competitions/(?:PD|PL|CL)/(?:matches|standings)(?:\\?season=\\d{4})?|matches/\\d+)"))
+            throw new IllegalArgumentException("Recurso de fútbol no permitido.");
+        HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + recurso))
+                .header("X-Auth-Token", token).header("Accept", "application/json")
+                .timeout(Duration.ofSeconds(25)).GET().build();
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() != 200) {
+            String motivo = switch (response.statusCode()) {
+                case 401 -> "La clave de la API no fue aceptada.";
+                case 403 -> "Tu plan de API no permite consultar este recurso o temporada.";
+                case 429 -> "Se alcanzó el límite de consultas. Espera un minuto antes de actualizar.";
+                default -> "La API no está disponible (HTTP " + response.statusCode() + ").";
+            };
+            throw new IOException(motivo);
+        }
+        return response.body();
+    }
     // -------------------------------------------------------------------------
     // Obtención vía Archivo Local JSON (src/main/resources/)
     // -------------------------------------------------------------------------
@@ -284,51 +274,8 @@ public class FootballApiService {
      * Orden de búsqueda:
      * 1. Variable de Entorno: FOOTBALL_API_KEY
      * 2. Propiedad de JVM: -DFOOTBALL_API_KEY=...
-     * 3. Archivo ignorado por Git: src/main/resources/config.properties
+     * 3. Archivo ignorado por Git: config.local.properties
      */
-    private static String cargarApiKey() {
-        // 1. Variable de entorno (útil para IntelliJ Run Configurations o CI/CD)
-        String envKey = System.getenv("FOOTBALL_API_KEY");
-        if (envKey != null && !envKey.isBlank()) {
-            return envKey.trim();
-        }
-
-        // 2. Propiedad del sistema JVM
-        String propKey = System.getProperty("FOOTBALL_API_KEY");
-        if (propKey != null && !propKey.isBlank()) {
-            return propKey.trim();
-        }
-
-        // 3. Archivo config.properties (en Classpath / resources)
-        try (InputStream is = FootballApiService.class.getResourceAsStream("/config.properties")) {
-            if (is != null) {
-                Properties props = new Properties();
-                props.load(is);
-                String fileKey = props.getProperty("FOOTBALL_API_KEY");
-                if (fileKey != null && !fileKey.isBlank()) {
-                    return fileKey.trim();
-                }
-            }
-        } catch (Exception ignored) {
-        }
-
-        // 4. Archivo config.properties (Filesystem fallback directo)
-        Path pathDirecto = Path.of("src", "main", "resources", "config.properties");
-        if (Files.exists(pathDirecto)) {
-            try (InputStream is = Files.newInputStream(pathDirecto)) {
-                Properties props = new Properties();
-                props.load(is);
-                String fileKey = props.getProperty("FOOTBALL_API_KEY");
-                if (fileKey != null && !fileKey.isBlank()) {
-                    return fileKey.trim();
-                }
-            } catch (Exception ignored) {
-            }
-        }
-
-        return "";
-    }
-
     // -------------------------------------------------------------------------
     // Método Main de Prueba Rápida (Listo para Run en IntelliJ)
     // -------------------------------------------------------------------------

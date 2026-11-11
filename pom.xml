@@ -13,6 +13,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.12.1</junit.version>
         <hibernate.version>6.4.4.Final</hibernate.version>
+        <demo.fallar>false</demo.fallar>
+        <demo>false</demo>
     </properties>
 
     <dependencies>
@@ -75,6 +77,17 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <useModulePath>false</useModulePath>
+                    <systemPropertyVariables>
+                        <futbol.demo>true</futbol.demo>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
@@ -92,9 +105,13 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                ni.edu.uam.proyectofinalivsemestre/ni.edu.uam.proyectofinalivsemestre.HelloApplication
+                                ni.edu.uam.proyectofinalivsemestre/ni.edu.uam.proyectofinalivsemestre.launcher.Launcher
                             </mainClass>
                             <launcher>app</launcher>
+                            <options>
+                                <option>-Dfutbol.demo=${demo}</option>
+                                <option>-Dfutbol.demo.fallar=${demo.fallar}</option>
+                            </options>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
                             <noManPages>true</noManPages>

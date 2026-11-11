@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Favoritos y detalle</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"><style>
+body{margin:0}
+.win{width:1100px;height:680px;display:flex;font-family:Inter,Arial,sans-serif;color:#14221E;background:#F2F5F3;box-sizing:border-box;overflow:hidden}
+aside{width:200px;background:#0F2A24;color:#fff;display:flex;flex-direction:column;padding:20px 12px;box-sizing:border-box;gap:4px;flex:none}
+.brand{font-weight:700;font-size:18px;padding:4px 12px 20px}
+.nav{display:block;padding:12px;border-radius:8px;color:#C9DAD3;font-size:14px;text-decoration:none}
+.nav.on{background:#1C4A3C;color:#fff;font-weight:600}
+.foot{margin-top:auto;font-size:12px;line-height:1.5;color:#A9C2B8;padding:12px}
+main{flex:1;display:flex;flex-direction:column;padding:24px 28px;gap:16px;min-width:0;box-sizing:border-box}
+h1{margin:0;font-size:22px}h2{margin:0;font-size:15px}
+.bar{display:flex;gap:10px;align-items:center}
+.btn{height:44px;padding:0 14px;border:1px solid #C5D2CC;background:#fff;border-radius:8px;font:500 14px Inter,Arial,sans-serif;color:#14221E}
+.btn.p{background:#17775A;color:#fff;border-color:#17775A}
+.card{background:#fff;border:1px solid #DCE5E0;border-radius:10px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-weight:600;font-size:12px;color:#4A5B55;background:#EAF0ED;padding:10px 12px}
+td{padding:4px 12px;border-top:1px solid #E6EDE9;height:44px}
+.r{text-align:right}.c{text-align:center}
+.tag{font-size:12px;padding:3px 8px;border-radius:99px;background:#E3EFE9;color:#0F5A43;font-weight:600}
+.live{background:#FDE7E4;color:#9A2417}
+.note{font-size:12px;color:#4A5B55}
+.item{padding:12px 14px;border-top:1px solid #E6EDE9;font-size:14px;display:flex;justify-content:space-between;align-items:center}
+.item.on{background:#E3EFE9;font-weight:600}
+.bk{height:8px;border-radius:4px;background:#D6E2DC;display:flex;overflow:hidden}
+.st{display:grid;grid-template-columns:40px 1fr 40px;gap:10px;align-items:center;font-size:13px}
+</style></head><body>
+<div class="win"><aside><div class="brand">Fútbol App</div>
+<a class="nav " href="#">Partidos</a><a class="nav " href="#">Posiciones</a><a class="nav on" href="#">Favoritos</a>
+<div class="foot">Caché local · actualizada 10:42<br>PostgreSQL conectado</div></aside><main>
+<div class="bar"><h1>Favoritos y detalle</h1><span style="flex:1"></span><button class="btn p">Actualizar detalle</button></div>
+<div style="display:flex;gap:16px;flex:1;min-height:0">
+<div class="card" style="width:290px;flex:none"><div class="bar" style="padding:12px"><button class="btn p" style="flex:1">Partidos</button><button class="btn" style="flex:1">Equipos</button></div>
+<div class="item on"><span>Real Madrid 2 - 1 Barcelona</span><span>★</span></div>
+<div class="item"><span>Inter 1 - 0 Bayern</span><span>★</span></div>
+<div class="item"><span>Arsenal vs Chelsea</span><span>★</span></div>
+<div class="item"><span>PSG vs Atlético</span><span>★</span></div></div>
+<div class="card" style="flex:1;padding:22px;display:flex;flex-direction:column;gap:18px;overflow:hidden">
+<div class="bar"><span class="tag">LaLiga</span><span class="note">10/11/2026 · 16:30 · Estadio [ESTADIO]</span><span style="flex:1"></span><span class="tag">Finalizado</span></div>
+<div style="display:flex;justify-content:center;align-items:center;gap:28px;font-size:20px;font-weight:600"><span>Real Madrid</span><span style="font-size:40px;font-weight:700">2 - 1</span><span>Barcelona</span></div>
+<div style="display:flex;gap:28px">
+<div style="flex:1;display:flex;flex-direction:column;gap:10px"><h2>Eventos del partido</h2>
+<div class="note" style="font-size:14px;color:#14221E">12' · Gol · Real Madrid</div>
+<div class="note" style="font-size:14px;color:#14221E">34' · Tarjeta amarilla · Barcelona</div>
+<div class="note" style="font-size:14px;color:#14221E">58' · Gol · Barcelona</div>
+<div class="note" style="font-size:14px;color:#14221E">71' · Gol · Real Madrid</div></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px"><h2>Estadísticas</h2>
+<div class="st"><span>54%</span><div class="bk"><div style="width:54%;background:#17775A"></div></div><span>46%</span></div>
+<div class="st"><span>12</span><div class="bk"><div style="width:57%;background:#17775A"></div></div><span>9</span></div>
+<div class="st"><span>5</span><div class="bk"><div style="width:62%;background:#17775A"></div></div><span>3</span></div>
+<span class="note">Posesión · Tiros · Tiros a puerta</span></div></div>
+<div class="bar" style="margin-top:auto"><button class="btn">Quitar de favoritos</button><span style="flex:1"></span><span class="note">Datos de ejemplo</span></div>
+</div></div>
+</main></div></body></html>

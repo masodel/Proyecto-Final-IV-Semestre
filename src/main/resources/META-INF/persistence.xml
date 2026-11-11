@@ -24,6 +24,8 @@
         <class>ni.edu.uam.proyectofinalivsemestre.model.Standing</class>
         <class>ni.edu.uam.proyectofinalivsemestre.model.Lineup</class>
         <class>ni.edu.uam.proyectofinalivsemestre.model.Favorite</class>
+        <class>ni.edu.uam.proyectofinalivsemestre.model.ApiSnapshot</class>
+        <class>ni.edu.uam.proyectofinalivsemestre.model.MatchFavorite</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 

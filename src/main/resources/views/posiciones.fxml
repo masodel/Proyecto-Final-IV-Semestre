@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.proyectofinalivsemestre.controller.PosicionesController" spacing="16" styleClass="contenido">
+<HBox spacing="10" alignment="CENTER_LEFT"><Label text="Tablas de posiciones" styleClass="titulo"/><Region HBox.hgrow="ALWAYS"/><ComboBox fx:id="cmbLiga" prefWidth="190" accessibleText="Liga"/><ComboBox fx:id="cmbTemporada" prefWidth="145" accessibleText="Temporada"/><Button fx:id="btnActualizar" text="Actualizar" onAction="#onActualizar" styleClass="btn-primario"/></HBox>
+<TableView fx:id="tblPosiciones" prefHeight="394" minHeight="394" maxHeight="394" styleClass="tarjeta">
+<columns><TableColumn fx:id="colPos" text="#" prefWidth="45" minWidth="45" styleClass="centrado"/>
+<TableColumn fx:id="colEquipo" text="Equipo" prefWidth="250" minWidth="45" styleClass="fuerte"/>
+<TableColumn fx:id="colPj" text="PJ" prefWidth="60" minWidth="45" styleClass="derecha"/>
+<TableColumn fx:id="colG" text="G" prefWidth="60" minWidth="45" styleClass="derecha"/>
+<TableColumn fx:id="colE" text="E" prefWidth="60" minWidth="45" styleClass="derecha"/>
+<TableColumn fx:id="colP" text="P" prefWidth="60" minWidth="45" styleClass="derecha"/>
+<TableColumn fx:id="colGf" text="GF" prefWidth="60" minWidth="45" styleClass="derecha"/>
+<TableColumn fx:id="colGc" text="GC" prefWidth="60" minWidth="45" styleClass="derecha"/>
+<TableColumn fx:id="colDg" text="DG" prefWidth="60" minWidth="45" styleClass="derecha"/>
+<TableColumn fx:id="colPts" text="Pts" prefWidth="60" minWidth="45" styleClass="derecha, fuerte"/></columns>
+</TableView>
+<HBox spacing="10" alignment="CENTER_LEFT"><Region minWidth="12" prefWidth="12" minHeight="12" maxHeight="12" styleClass="leyenda-champions"/><Label fx:id="lblInfo" styleClass="nota" wrapText="true" HBox.hgrow="ALWAYS"/><ProgressIndicator fx:id="piCarga" visible="false" managed="false" prefWidth="24" prefHeight="24" maxWidth="24" maxHeight="24" accessibleText="Cargando datos"/></HBox>
+<Region VBox.vgrow="ALWAYS"/>
+</VBox>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.proyectofinalivsemestre.controller.FavoritosController" spacing="16" styleClass="contenido">
+<fx:define><ToggleGroup fx:id="grupoTipo"/></fx:define>
+<HBox spacing="10" alignment="CENTER_LEFT"><Label text="Favoritos y detalle" styleClass="titulo"/><Region HBox.hgrow="ALWAYS"/><ProgressIndicator fx:id="piCarga" visible="false" managed="false" prefWidth="24" prefHeight="24" maxWidth="24" maxHeight="24" accessibleText="Cargando datos"/><Button fx:id="btnActualizarDetalle" text="Actualizar detalle" onAction="#onActualizarDetalle" styleClass="btn-primario"/></HBox>
+<HBox spacing="16" VBox.vgrow="ALWAYS">
+    <VBox prefWidth="290" minWidth="290" maxWidth="290" styleClass="tarjeta">
+        <HBox spacing="10" styleClass="pestanas">
+            <ToggleButton fx:id="btnTipoPartidos" text="Partidos" selected="true" toggleGroup="$grupoTipo" onAction="#onCambiarTipo" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            <ToggleButton fx:id="btnTipoEquipos" text="Equipos" toggleGroup="$grupoTipo" onAction="#onCambiarTipo" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+        </HBox>
+        <ListView fx:id="lstFavoritos" VBox.vgrow="ALWAYS" accessibleText="Lista de favoritos"/>
+    </VBox>
+    <StackPane HBox.hgrow="ALWAYS" minWidth="0" styleClass="tarjeta">
+        <Label fx:id="lblSinSeleccion" text="Selecciona un partido para ver el detalle" wrapText="true" styleClass="nota"/>
+        <VBox fx:id="panelDetalle" spacing="18" styleClass="detalle" minWidth="0">
+            <FlowPane hgap="8" vgap="8">
+                <Label fx:id="lblLiga" styleClass="etiqueta"/>
+                <Label fx:id="lblFechaEstadio" styleClass="nota" wrapText="true"/>
+                <Label fx:id="lblEstado" styleClass="etiqueta"/>
+            </FlowPane>
+            <HBox alignment="CENTER" spacing="16">
+                <Label fx:id="lblLocal" styleClass="equipo" wrapText="true" minWidth="0" HBox.hgrow="ALWAYS"/>
+                <Label fx:id="lblMarcador" styleClass="marcador" minWidth="-Infinity"/>
+                <Label fx:id="lblVisitante" styleClass="equipo" wrapText="true" minWidth="0" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox spacing="20" VBox.vgrow="ALWAYS" minHeight="140">
+                <VBox spacing="10" HBox.hgrow="ALWAYS" prefWidth="220" minWidth="0">
+                    <Label text="Eventos del partido" styleClass="subtitulo"/>
+                    <ListView fx:id="lstEventos" VBox.vgrow="ALWAYS" styleClass="eventos" accessibleText="Eventos del partido"/>
+                </VBox>
+                <VBox spacing="10" HBox.hgrow="ALWAYS" prefWidth="180" minWidth="0">
+                    <Label text="Estadísticas" styleClass="subtitulo"/>
+                    <HBox spacing="10" alignment="CENTER_LEFT"><Label fx:id="lblPosesion" minWidth="32"/><ProgressBar fx:id="pbPosesion" maxWidth="Infinity" accessibleText="Posesión local" HBox.hgrow="ALWAYS"/><Label fx:id="lblPosesionVisitante" minWidth="32"/></HBox>
+                    <HBox spacing="10" alignment="CENTER_LEFT"><Label fx:id="lblTiros" minWidth="32"/><ProgressBar fx:id="pbTiros" maxWidth="Infinity" accessibleText="Proporción de tiros locales" HBox.hgrow="ALWAYS"/><Label fx:id="lblTirosVisitante" minWidth="32"/></HBox>
+                    <HBox spacing="10" alignment="CENTER_LEFT"><Label fx:id="lblTirosPuerta" minWidth="32"/><ProgressBar fx:id="pbTirosPuerta" maxWidth="Infinity" accessibleText="Proporción de tiros a puerta locales" HBox.hgrow="ALWAYS"/><Label fx:id="lblTirosPuertaVisitante" minWidth="32"/></HBox>
+                    <Label text="Posesión · Tiros · Tiros a puerta" styleClass="nota" wrapText="true"/>
+                </VBox>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="8">
+                <Button fx:id="btnFavorito" text="Agregar a favoritos" onAction="#onAlternarFavorito" styleClass="btn-secundario"/>
+                <Region HBox.hgrow="ALWAYS"/><Label text="Datos guardados" styleClass="nota"/>
+            </HBox>
+        </VBox>
+    </StackPane>
+</HBox>
+</VBox>

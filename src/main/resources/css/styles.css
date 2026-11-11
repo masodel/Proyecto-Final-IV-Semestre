@@ -1,0 +1,70 @@
+.root {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-base: #FFFFFF;
+    -fx-background: #F2F5F3;
+    -fx-background-color: #F2F5F3;
+    -fx-text-base-color: #14221E;
+    -fx-accent: #17775A;
+    -fx-focus-color: #17775A;
+    -fx-faint-focus-color: #17775A22;
+}
+.label { -fx-text-fill: #14221E; }
+.contenido { -fx-padding: 24 28; }
+.barra-lateral { -fx-background-color: #0F2A24; -fx-padding: 20 12; }
+.marca { -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold; -fx-padding: 4 12 20; }
+.pie { -fx-text-fill: #A9C2B8; -fx-font-size: 12px; -fx-padding: 12; -fx-line-spacing: 4; }
+.button, .toggle-button {
+    -fx-min-height: 44px; -fx-padding: 0 14;
+    -fx-background-color: white; -fx-border-color: #C5D2CC;
+    -fx-background-radius: 8; -fx-border-radius: 8; -fx-cursor: hand;
+}
+.button:hover, .toggle-button:hover { -fx-background-color: #E3EFE9; }
+.button:focused, .toggle-button:focused { -fx-border-color: #17775A; -fx-border-width: 2; }
+.btn-primario, .pestanas .toggle-button:selected {
+    -fx-background-color: #17775A; -fx-border-color: #17775A; -fx-text-fill: white;
+}
+.btn-primario:hover { -fx-background-color: #0F5A43; }
+.btn-secundario { -fx-background-color: white; -fx-border-color: #C5D2CC; }
+.nav { -fx-alignment: CENTER_LEFT; -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #C9DAD3; -fx-padding: 12; }
+.nav:hover { -fx-background-color: #173D32; }
+.nav:selected { -fx-background-color: #1C4A3C; -fx-text-fill: white; -fx-font-weight: bold; }
+.nav:focused { -fx-border-color: #A9C2B8; }
+.titulo { -fx-font-size: 22px; -fx-font-weight: bold; }
+.subtitulo { -fx-font-size: 15px; -fx-font-weight: bold; }
+.nota { -fx-font-size: 12px; -fx-text-fill: #4A5B55; }
+.tarjeta { -fx-background-color: white; -fx-border-color: #DCE5E0; -fx-border-radius: 10; -fx-background-radius: 10; }
+.combo-box, .date-picker { -fx-min-height: 44px; -fx-background-color: white; -fx-border-color: #C5D2CC; -fx-border-radius: 8; -fx-background-radius: 8; }
+.combo-box .list-cell { -fx-padding: 8 10; }
+.date-picker .text-field { -fx-background-color: transparent; }
+.date-picker .arrow-button, .combo-box .arrow-button { -fx-background-color: transparent; }
+.table-view { -fx-padding: 0; -fx-background-insets: 0; }
+.table-view .column-header-background, .table-view .column-header, .table-view .filler, .encabezado-tabla {
+    -fx-background-color: #EAF0ED;
+}
+.table-view .column-header { -fx-size: 36px; -fx-border-width: 0; }
+.table-view .column-header .label { -fx-alignment: CENTER_LEFT; -fx-padding: 0 10; -fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #4A5B55; }
+.table-row-cell { -fx-cell-size: 44px; -fx-background-color: white; -fx-border-color: transparent transparent #E6EDE9 transparent; -fx-border-width: 0 0 1 4; }
+.table-row-cell:empty { -fx-border-color: transparent; }
+.table-row-cell:selected { -fx-background-color: #E3EFE9; -fx-text-background-color: #14221E; }
+.table-cell { -fx-alignment: CENTER_LEFT; -fx-padding: 0 8; -fx-border-width: 0; }
+.centrado, .table-view .centrado .label { -fx-alignment: CENTER; }
+.derecha, .table-view .derecha .label { -fx-alignment: CENTER_RIGHT; }
+.fuerte { -fx-font-weight: bold; }
+.etiqueta { -fx-font-size: 12px; -fx-font-weight: bold; -fx-padding: 3 8; -fx-background-radius: 99; -fx-background-color: #E3EFE9; -fx-text-fill: #0F5A43; }
+.estado-vivo { -fx-background-color: #FDE7E4; -fx-text-fill: #9A2417; }
+.zona-champions { -fx-border-color: transparent transparent #E6EDE9 #2F6FDB; -fx-border-width: 0 0 1 4; }
+.leyenda-champions { -fx-background-color: #2F6FDB; -fx-background-radius: 3; }
+.btn-estrella { -fx-min-width: 44; -fx-min-height: 44; -fx-padding: 0; -fx-font-size: 20px; -fx-text-fill: #17775A; }
+.pestanas { -fx-padding: 12; }
+.detalle { -fx-padding: 22; }
+.equipo { -fx-font-size: 20px; -fx-font-weight: bold; -fx-alignment: CENTER; }
+.marcador { -fx-font-size: 40px; -fx-font-weight: bold; }
+.list-view { -fx-background-color: transparent; -fx-padding: 0; }
+.list-cell { -fx-background-color: white; -fx-padding: 12 14; -fx-border-color: #E6EDE9 transparent transparent transparent; }
+.list-cell:empty { -fx-border-color: transparent; }
+.list-cell:selected { -fx-background-color: #E3EFE9; -fx-text-fill: #14221E; -fx-font-weight: bold; }
+.eventos .list-cell { -fx-padding: 6 0; -fx-border-width: 0; -fx-font-size: 13px; }
+.progress-bar { -fx-pref-height: 8; -fx-max-height: 8; }
+.progress-bar .track { -fx-background-color: #D6E2DC; -fx-background-radius: 4; -fx-background-insets: 0; }
+.progress-bar .bar { -fx-background-color: #17775A; -fx-background-radius: 4; -fx-background-insets: 0; -fx-padding: 4; }
